@@ -1,0 +1,139 @@
+{
+  "books": [
+   {
+    "id": 1,
+    "book_name": "The Alchemist",
+    "image": "https://example.com/images/the-alchemist.jpg",
+    "writer_name": "Paulo Coelho",
+    "book_type": "Fiction",
+    "rating": 4.7,
+    "book_tags": ["inspirational", "philosophy", "adventure"]
+  },
+  {
+    "id": 2,
+    "book_name": "Atomic Habits",
+    "image": "https://example.com/images/atomic-habits.jpg",
+    "writer_name": "James Clear",
+    "book_type": "Self-help",
+    "rating": 4.8,
+    "book_tags": ["productivity", "habits", "personal development"]
+  },
+  {
+    "id": 3,
+    "book_name": "1984",
+    "image": "https://example.com/images/1984.jpg",
+    "writer_name": "George Orwell",
+    "book_type": "Dystopian",
+    "rating": 4.6,
+    "book_tags": ["politics", "totalitarianism", "classic"]
+  },
+  {
+    "id": 4,
+    "book_name": "Rich Dad Poor Dad",
+    "image": "https://example.com/images/rich-dad-poor-dad.jpg",
+    "writer_name": "Robert Kiyosaki",
+    "book_type": "Finance",
+    "rating": 4.5,
+    "book_tags": ["money", "investing", "financial literacy"]
+  },
+  {
+    "id": 5,
+    "book_name": "Harry Potter and the Sorcerer's Stone",
+    "image": "https://example.com/images/harry-potter-1.jpg",
+    "writer_name": "J.K. Rowling",
+    "book_type": "Fantasy",
+    "rating": 4.9,
+    "book_tags": ["magic", "adventure", "young adult"]
+  },
+  {
+    "id": 6,
+    "book_name": "The Great Gatsby",
+    "image": "https://example.com/images/gatsby.jpg",
+    "writer_name": "F. Scott Fitzgerald",
+    "book_type": "Classic",
+    "rating": 4.4,
+    "book_tags": ["romance", "tragedy", "american dream"]
+  },
+  {
+    "id": 7,
+    "book_name": "To Kill a Mockingbird",
+    "image": "https://example.com/images/mockingbird.jpg",
+    "writer_name": "Harper Lee",
+    "book_type": "Classic",
+    "rating": 4.8,
+    "book_tags": ["justice", "racism", "coming of age"]
+  },
+  {
+    "id": 8,
+    "book_name": "The Power of Now",
+    "image": "https://example.com/images/power-of-now.jpg",
+    "writer_name": "Eckhart Tolle",
+    "book_type": "Spiritual",
+    "rating": 4.6,
+    "book_tags": ["mindfulness", "spirituality", "self-awareness"]
+  },
+  {
+    "id": 9,
+    "book_name": "Sapiens: A Brief History of Humankind",
+    "image": "https://example.com/images/sapiens.jpg",
+    "writer_name": "Yuval Noah Harari",
+    "book_type": "History",
+    "rating": 4.7,
+    "book_tags": ["evolution", "human history", "science"]
+  },
+  {
+    "id": 10,
+    "book_name": "The Hobbit",
+    "image": "https://example.com/images/hobbit.jpg",
+    "writer_name": "J.R.R. Tolkien",
+    "book_type": "Fantasy",
+    "rating": 4.8,
+    "book_tags": ["adventure", "dragons", "middle earth"]
+  },
+  {
+    "id": 11,
+    "book_name": "Think and Grow Rich",
+    "image": "https://example.com/images/think-grow-rich.jpg",
+    "writer_name": "Napoleon Hill",
+    "book_type": "Self-help",
+    "rating": 4.5,
+    "book_tags": ["success", "wealth", "mindset"]
+  },
+  {
+    "id": 12,
+    "book_name": "The Subtle Art of Not Giving a F*ck",
+    "image": "https://example.com/images/subtle-art.jpg",
+    "writer_name": "Mark Manson",
+    "book_type": "Self-help",
+    "rating": 4.4,
+    "book_tags": ["life advice", "mindset", "self-improvement"]
+  },
+  {
+    "id": 13,
+    "book_name": "The Catcher in the Rye",
+    "image": "https://example.com/images/catcher.jpg",
+    "writer_name": "J.D. Salinger",
+    "book_type": "Classic",
+    "rating": 4.2,
+    "book_tags": ["teenage life", "identity", "rebellion"]
+  },
+  {
+    "id": 14,
+    "book_name": "Deep Work",
+    "image": "https://example.com/images/deep-work.jpg",
+    "writer_name": "Cal Newport",
+    "book_type": "Productivity",
+    "rating": 4.6,
+    "book_tags": ["focus", "career", "productivity"]
+  },
+  {
+    "id": 15,
+    "book_name": "Ikigai",
+    "image": "https://example.com/images/ikigai.jpg",
+    "writer_name": "Héctor García & Francesc Miralles",
+    "book_type": "Philosophy",
+    "rating": 4.5,
+    "book_tags": ["purpose", "japanese culture", "lifestyle"]
+  }
+  ]
+}
