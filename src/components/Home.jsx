@@ -6,7 +6,7 @@ const Home = () => {
     const books = useLoaderData();
     return (
         <>
-        <div className='px-[135px]'>
+        <div>
              <Hero></Hero>
             <Books books={books.books}></Books>
         </div>

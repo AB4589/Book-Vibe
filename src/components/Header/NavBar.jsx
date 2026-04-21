@@ -1,8 +1,10 @@
 import React from 'react';
+import NavLinks from './Links'
 
 const NavBar = () => {
+  const links =  <NavLinks></NavLinks>;
     return (
-      <div className="navbar bg-base-100 shadow-sm px-[135px] my-[50px]">
+      <div className="navbar bg-base-100 px-[135px] my-[50px]">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -26,9 +28,7 @@ const NavBar = () => {
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><a>Home</a></li>
-      <li><a>Listed Books</a> </li>
-      <li><a>Pages to Read</a></li>
+     {links}
     </ul>
   </div>
   <div className="navbar-end">
