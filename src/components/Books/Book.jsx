@@ -7,8 +7,7 @@ const Book = ({book}) => {
     console.log(book)
     const {bookName, category, image,  tags, rating, publisher, bookId} = book;
     return (
-  
-<div className="card bg-base-100 shadow-sm border-[#13131326] w-[374px]">
+<div className="card bg-base-100 border border-[#13131326] w-[374px]">
      <Link to={`/bookDetails/${bookId}`}>
     <div className='flex justify-center items-center p-6'>
         <figure className=" px-10 pt-10 bg-[#F3F3F3] w-[326px] h-[230px] rounded">
@@ -22,8 +21,6 @@ const Book = ({book}) => {
         {
             tags.map((tags, index)=>  <div className="badge badge-soft bg-[#23BE0A0D] font-medium text-[#23BE0A] mr-3" key={index}>{tags}</div>)
         }
-       
-        
     </div>
     <div className="card-body">
         <h2 className='card-title font-bold'>{bookName}</h2>

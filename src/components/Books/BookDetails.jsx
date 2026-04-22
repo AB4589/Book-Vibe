@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import HeroBook from '../../assets/hero-book.png';
+import { addToStoredDB } from '../../utility/addToDB';
 const BookDetails = () => {
     const { booksId } = useParams();
     
@@ -9,10 +10,12 @@ const BookDetails = () => {
     const SingleBook = books.books?.find(book=> Number(book.bookId) === Number(booksId));
     console.log(SingleBook);
     const {bookName, publisher, image, category, tags, review} = SingleBook;
+
+      const handleMarkAsRead = (id) => {
+        addToStoredDB(id);
+    };
   
-    const handleMarkAsRead = id = {
-        
-    }
+
     return (
         <div className='flex'>
             <div className='flex bg-[#1313130D] flex-1 justify-center items-center'>
@@ -33,7 +36,6 @@ const BookDetails = () => {
                     {
                         tags.map((tag, index)=> <h3 key={index} className='bg-[#23BE0A0D] text-[#23BE0A] rounded-3xl py-2 px-4'>#{tag}</h3>)
                     }
-                    
                 </div>
                 <div className='border-1 border-[#13131326] my-6'></div>
                 <div className='flex'>
@@ -51,7 +53,7 @@ const BookDetails = () => {
                    </div>
                 </div>
                 <div className='mt-8'>
-                    <a className="btn px-4 text-[#131313] text-xl py-5 mr-4" onClick={handleMarkAsRead}>Read</a>
+                    <a className="btn px-4 text-[#131313] text-xl py-5 mr-4" onClick={()=> handleMarkAsRead(booksId)}>Read</a>
                     <a className="btn px-4 bg-[#59C6D2] text-[#ffffff] text-xl py-5">Wishlist</a>
                 </div>
             </div>
