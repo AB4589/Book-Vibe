@@ -7,7 +7,8 @@ const Book = ({book}) => {
     console.log(book)
     const {bookName, category, image,  tags, rating, publisher, bookId} = book;
     return (
-<div className="card bg-base-100 border border-[#13131326] w-[374px]">
+    <>
+        <div className="card bg-base-100 border border-[#13131326] w-[374px]">
      <Link to={`/bookDetails/${bookId}`}>
     <div className='flex justify-center items-center p-6'>
         <figure className=" px-10 pt-10 bg-[#F3F3F3] w-[326px] h-[230px] rounded">
@@ -38,6 +39,7 @@ const Book = ({book}) => {
     </div>
     </Link>
 </div>
+    </>
 
 
 

@@ -11,7 +11,7 @@ const BookDetails = () => {
     console.log(SingleBook);
     const {bookName, publisher, image, category, tags, review} = SingleBook;
 
-      const handleMarkAsRead = (id) => {
+    const handleMarkAsRead = (id) => {
         addToStoredDB(id);
     };
   

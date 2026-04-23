@@ -1,31 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaAngleDown } from "react-icons/fa6";
+import { useLoaderData } from 'react-router';
+import { getStoredBook } from '../../utility/addToDB';
+import Book from './Book';
 
 const BookList = () => {
+  const data = useLoaderData();
+  const books = data.books;
+  const [readList, setReadList] = useState([]);
+  useEffect(()=>{
+    const storedBookData = getStoredBook();
+    const ConvertedStoredBooks = storedBookData.map(book=>parseInt(storedBookData));
+    const myReadList = books.filter(book=> ConvertedStoredBooks.includes(book.bookId));
+    setReadList(myReadList);
+    console.log(readList);
+  },[])
     return (
-        <div>
-            <div className='flex justify-center items-center p-8 bg-[#1313130D] rounded-2xl'>
-                <h2 className='font-bold text-3xl'>Book List</h2>
-            </div>
-            <div className='flex justify-center items-center py-8'>
-            <button className='btn bg-[#23BE0A] text-[#FFFFFF] px-5 py-3 font-semibold text-lg'>Sort By<FaAngleDown /></button>
-            </div>
-
+      <>
             {/* name of each tab group should be unique */}
-<div className="tabs tabs-lift">
-  <label className="tab">
-    <input type="radio" name="my_tabs_4" />
-    Read Books
-  </label>
-  <div className="tab-content bg-base-100 border-base-300 p-6">Tab content 1</div>
-
-  <label className="tab">
-    <input type="radio" name="my_tabs_4" defaultChecked />
-    Wishlist Books
-  </label>
-  <div className="tab-content bg-base-100 border-base-300 p-6">Tab content 2</div>
-</div>
+        <div className="tabs tabs-border">
+          <input type="radio" name="my_tabs_2" className="tab" aria-label="Read List" defaultChecked/>
+          <div className="tab-content border-base-300 bg-base-100 p-10">
+             {
+                readList.map(b=><Book key={b.bookId} book={b}></Book>)
+              }
+          </div>
+          <input type="radio" name="my_tabs_2" className="tab" aria-label="Wish List"  />
+          <div className="tab-content border-base-300 bg-base-100 p-10">Tab content 2</div>
         </div>
+      </>
     );
 };
 
