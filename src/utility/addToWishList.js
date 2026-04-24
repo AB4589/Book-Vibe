@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
-const getStoredBook = () => {
-    const storedBookSTR = localStorage.getItem("readList");
+const getWishList = () => {
+    const storedBookSTR = localStorage.getItem("wishList");
 
     if (storedBookSTR){
         const storedBookSData = JSON.parse(storedBookSTR);
@@ -11,8 +11,8 @@ const getStoredBook = () => {
         return [];
     }
 }
-const addToStoredDB = (id) => {
-   const storedBookSData =  getStoredBook();
+const addToWishList = (id) => {
+   const storedBookSData =  getWishList();
 
    if( storedBookSData.includes(id)){
     toast('Id already exist!');
@@ -23,10 +23,10 @@ const addToStoredDB = (id) => {
    else{
     storedBookSData.push(id);
     const data = JSON.stringify(storedBookSData);
-    localStorage.setItem("readList", data);
-     toast('Added to readlist.')
+    localStorage.setItem("wishList", data);
+     toast('Added to WishList.')
     console.log((storedBookSData))
    }
 }
 
-export {addToStoredDB, getStoredBook};
+export {addToWishList, getWishList};

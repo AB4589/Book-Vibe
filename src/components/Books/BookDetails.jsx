@@ -2,6 +2,9 @@ import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import HeroBook from '../../assets/hero-book.png';
 import { addToStoredDB } from '../../utility/addToDB';
+import { ToastContainer } from 'react-toastify';
+import { addToWishList } from '../../utility/addToWishList';
+
 const BookDetails = () => {
     const { booksId } = useParams();
     
@@ -13,6 +16,11 @@ const BookDetails = () => {
 
     const handleMarkAsRead = (id) => {
         addToStoredDB(id);
+        
+    };
+    const handleMarkAsWishList = (id) => {
+        addToWishList(id);
+        
     };
   
 
@@ -54,9 +62,10 @@ const BookDetails = () => {
                 </div>
                 <div className='mt-8'>
                     <a className="btn px-4 text-[#131313] text-xl py-5 mr-4" onClick={()=> handleMarkAsRead(booksId)}>Read</a>
-                    <a className="btn px-4 bg-[#59C6D2] text-[#ffffff] text-xl py-5">Wishlist</a>
+                    <a className="btn px-4 bg-[#59C6D2] text-[#ffffff] text-xl py-5" onClick={()=> handleMarkAsWishList(booksId)}>Wishlist</a>
                 </div>
             </div>
+              <ToastContainer />
         </div>
     );
 };
