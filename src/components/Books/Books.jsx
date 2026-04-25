@@ -14,7 +14,9 @@ const Books = ({books}) => {
 
     return (
         <>
+        <div className='my-8'>
           <h2 className='flex justify-center align-center font-bold'>Books</h2>
+        </div>
         <div className='grid grid-cols-3 gap-4'>
             <Suspense fallback={<span>Loading...</span>}>
                  {books?.map((book, index) => (

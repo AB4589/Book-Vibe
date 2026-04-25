@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 
 
 export const ReadList = ({book}) => {
-const {bookName, category, image,  tags, rating, publisher, bookId, totalPages} = book;
+const {bookName, category, image,  tags, rating, publisher, bookId, totalPages, yearOfPublishing} = book;
   return (
     <div className='flex items-center border-1 border-[#13131326] my-6'>
         <div className='w-1/8 m-6 border rounded-2xl'>
@@ -20,7 +20,7 @@ const {bookName, category, image,  tags, rating, publisher, bookId, totalPages} 
                 {
                     tags.map((tags, index)=>  <div className="badge badge-soft bg-[#23BE0A0D] font-medium text-[#23BE0A] mx-3" key={index}>{tags}</div>)
                 }
-                <IoLocationOutline /> Year of Publishing: 1924
+                <IoLocationOutline /> Year of Publishing: {yearOfPublishing}
                 </div>
                 <div className='flex items-center space-x-2'>
                     <div className='flex items-center'>

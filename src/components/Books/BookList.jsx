@@ -4,11 +4,13 @@ import { useLoaderData } from 'react-router';
 import { getStoredBook } from '../../utility/addToDB';
 import Book from './Book';
 import { ReadList } from './ReadList';
+import { getWishList } from '../../utility/addToWishList';
 
 const BookList = () => {
   const data = useLoaderData();
   const books = data.books;
   const [readList, setReadList] = useState([]);
+  const [wishList, setWishList] = useState([])
   const [sort, setSort] = useState([]);
   useEffect(()=>{
     const storedBookData = getStoredBook();
@@ -19,6 +21,13 @@ const BookList = () => {
     setReadList(myReadList);
     console.log(myReadList)
     console.log(readList);
+    const storeWishList = getWishList();
+    console.log(storeWishList)
+    const ConvertedWishList = storeWishList.map(list=>parseInt(list));
+    console.log(ConvertedWishList)
+    const myWishList = books.filter(b=>ConvertedWishList.includes(b.bookId));
+    setWishList(myWishList)
+    console.log(wishList);
   },[])
     const handleSort = (type) => {
       setSort(type);
@@ -32,6 +41,11 @@ const BookList = () => {
         setReadList(sortedRating);
         console.log(readList)
       }
+      else if(type==='publish'){
+        const sortedYearOfPublishing = [...readList].sort((a,b)=> a.yearOfPublishing -b.yearOfPublishing);
+        setReadList(sortedYearOfPublishing);
+        console.log(sortedYearOfPublishing)
+      }
     }
     return (
       <>
@@ -44,12 +58,10 @@ const BookList = () => {
   <ul tabIndex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
     <li><a onClick={()=>handleSort("pages")}>Pages</a></li>
     <li><a onClick={()=>handleSort("rating")}>Ratings</a></li>
+    <li><a onClick={()=>handleSort("publish")}>Publisher year</a></li>
   </ul>
 </div>
-</div>
-
-
-       
+</div>       
             {/* name of each tab group should be unique */}
         <div className="tabs tabs-border">
           <input type="radio" name="my_tabs_2" className="tab" aria-label="Read List" defaultChecked/>
@@ -59,7 +71,11 @@ const BookList = () => {
               }
           </div>
           <input type="radio" name="my_tabs_2" className="tab" aria-label="Wish List"  />
-          <div className="tab-content border-base-300 bg-base-100 p-10 mt-8">Tab content 2</div>
+          <div className="tab-content border-base-300 bg-base-100 p-10 mt-8">
+              {
+                wishList.map(b=><ReadList key={b.bookId} book={b}></ReadList>)
+              }
+          </div>
         </div>
       </>
     );
