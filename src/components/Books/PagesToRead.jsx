@@ -1,82 +1,51 @@
-import React from 'react';
-import { Bar, BarChart, BarShapeProps, XAxis, YAxis } from 'recharts';
-import { RechartsDevtools } from '@recharts/devtools';
+import React from "react";
+import { Bar, BarChart, XAxis, YAxis, LabelList  } from "recharts";
+import { useLoaderData } from "react-router";
 
-// #region Sample data
-const data = [
-  {
-    name: 'Page A',
-    uv: 400,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 300,
-    pv: 4567,
-    amt: 2400,
-  },
-  {
-    name: 'Page C',
-    uv: 300,
-    pv: 1398,
-    amt: 2400,
-  },
-  {
-    name: 'Page D',
-    uv: 200,
-    pv: 9800,
-    amt: 2400,
-  },
-  {
-    name: 'Page E',
-    uv: 278,
-    pv: 3908,
-    amt: 2400,
-  },
-  {
-    name: 'Page F',
-    uv: 189,
-    pv: 4800,
-    amt: 2400,
-  },
-];
 
-const margin = {
-  top: 20,
-  right: 30,
-  left: 20,
-  bottom: 5,
-};
-// #endregion
-
-const getPath = (x, y, width, height) =>
+  const getPath = (x, y, width, height) =>
   `M${x},${y + height}
    C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${x + width / 2}, ${y}
    C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${x + width}, ${y + height}
    Z`;
 
-export function TriangleBar(props) {
+  const TriangleBar = (props) => {
   const { fill, x, y, width, height } = props;
 
-  if (x == null || y == null || width == null || height == null) {
-    return null;
-  }
+  if (!x || !y || !width || !height) return null;
+  
 
-  return <path d={getPath(Number(x), Number(y), Number(width), Number(height))} stroke="none" fill={fill} />;
-}
+  return (
+    <path
+      d={getPath(x, y, width, height)}
+      stroke="none"
+      fill={fill}
+    />
+  );
+  };
 
-const PagesToRead = () => {
-    return (
-        <div>
-             <BarChart width={600} height={300} data={data} margin={margin}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Bar dataKey="uv" fill="#8884d8" shape={TriangleBar} />
-                <RechartsDevtools />
-            </BarChart>
-        </div>
-    );
+
+
+ const PagesToRead = () => {
+  const margin = {
+  top: 20,
+  right: 30,
+  left: 20,
+  bottom: 5,
 };
+    const book = useLoaderData();
+      console.log(book.books)
+   return (
+   <div className="flex items-center justify-center">
+        <BarChart width={1200} height={600} data={book.books} margin={margin}>
+        
+         <XAxis dataKey="bookName" />
+         <YAxis />
+         <Bar dataKey="totalPages" fill="#8884d8" shape={<TriangleBar />} ><LabelList dataKey="totalPages" position="top" /></Bar>
+         {/* <RechartsDevtools /> */}
+       </BarChart>
+   </div>
+  );
+}
 
 export default PagesToRead;
