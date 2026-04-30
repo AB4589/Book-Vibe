@@ -66,14 +66,23 @@ const BookList = () => {
         <div className="tabs tabs-border">
           <input type="radio" name="my_tabs_2" className="tab" aria-label="Read List" defaultChecked/>
           <div className="tab-content border-base-300 bg-base-100 p-10 mt-8">
-             {
-                readList.map(b=><ReadList key={b.bookId} book={b}></ReadList>)
+           
+              {
+                readList.length === 0 ? (
+                  <strong>No Readlist Added yet</strong>
+                ) : (
+                  readList.map(b => <ReadList key={b.bookId} book={b} />)
+                )
               }
+              
           </div>
           <input type="radio" name="my_tabs_2" className="tab" aria-label="Wish List"  />
           <div className="tab-content border-base-300 bg-base-100 p-10 mt-8">
-              {
+              {/* {
                 wishList.map(b=><ReadList key={b.bookId} book={b}></ReadList>)
+              } */}
+              {
+                (wishList.length===0) ? (<strong>No Wish List Added yet</strong>)  : wishList.map(b=><ReadList key={b.bookId} book={b}></ReadList>)
               }
           </div>
         </div>

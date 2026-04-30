@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 
 const AuthorInfo = ({author}) => {
     return (
-        <div className="card bg-base-100 w-96 shadow-sm">
+        <div className="card bg-base-100 shadow-sm">
             <figure >
                 <img
                 src={author.authorImage}
@@ -15,10 +15,11 @@ const AuthorInfo = ({author}) => {
             </figure>
             <div className="card-body">
                <div>
-                 <h2 className="card-title justify-center font-medium">Author Name: {author.author}</h2>
+                 <h2 className="card-title justify-center">Author Name</h2>
+                 <h2 className='flex font-medium justify-center text-3xl'>{author.author}</h2>
                 <h3 className='card-title justify-center font-base text-sm my-2.5'>Type: {author.category}</h3>
                </div>
-                <div className="card-actions justify-between px-15">
+                <div className="card-actions justify-between">
                 
                 
                 <Link to={author.authorLinkedin}>
@@ -33,8 +34,6 @@ const AuthorInfo = ({author}) => {
                 <Link to={author.authorFacebook}>
                  <FaFacebookSquare size={30}/>
                 </Link>
-               
-                
                 
                 </div>
             </div>

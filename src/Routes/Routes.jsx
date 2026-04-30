@@ -13,6 +13,8 @@ import BookList from '../components/Books/BookList';
 import PagesToRead from '../components/Books/PagesToRead';
 import Author from '../components/Author/Author';
 import ContactUs from '../components/Contact/ContactUs';
+import Login from '../components/Auth/Login';
+import SignUp from '../components/Auth/SignUp';
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +48,14 @@ export const router = createBrowserRouter([
         {
           path: "/contact-us",
           Component: ContactUs
+        },
+         {
+          path: "/login",
+          Component: Login
+        },
+         {
+          path: "/sign-up",
+          Component: SignUp
         },
         {
 
