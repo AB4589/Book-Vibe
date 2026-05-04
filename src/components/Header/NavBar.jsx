@@ -1,9 +1,12 @@
 import React from 'react';
 import NavLinks from './Links'
 import { Link, Links } from 'react-router';
+import { getAuth } from 'firebase/auth';
 
-const NavBar = () => {
-  const links =  <NavLinks></NavLinks>;
+const NavBar = ({user}) => {
+  const auth = getAuth();
+
+  const links =  <NavLinks user={user}></NavLinks>;
     return (
       <div className="navbar bg-base-100 px-[135px] my-[50px]">
   <div className="navbar-start">
@@ -33,9 +36,35 @@ const NavBar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <Link to={'/login'}> <a className="btn mr-4 bg-[#23BE0A] text-[#ffffff]">Sign In</a></Link>
-   
-    <Link to={'/sign-up'}><a className="btn bg-[#59C6D2] text-[#ffffff]">Sign Up</a></Link>
+
+  {auth.currentUser === null ? (
+  <>
+    <Link
+      to="/login"
+      className="btn mr-4 bg-[#23BE0A] text-white"
+    >
+      Sign In
+    </Link>
+
+    <Link
+      to="/sign-up"
+      className="btn bg-[#59C6D2] text-white"
+    >
+      Sign Up
+    </Link>
+  </>
+) : (
+  <figure className="flex justify-center items-center gap-2">
+    <img
+      src={auth.currentUser.photoURL}
+      alt={auth.currentUser.displayName || "User"}
+      className="inline-block size-10 rounded-full ring-2 ring-white outline -outline-offset-1 outline-black/5"
+    />
+    <figcaption>
+      <p>{auth.currentUser.displayName}</p>
+    </figcaption>
+  </figure>
+)  }
   </div>
 </div>
     );

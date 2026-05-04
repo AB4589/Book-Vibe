@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <>
         <div>
-            <Hero></Hero>
+            <Hero user></Hero>
             <Books books={books.books}></Books>
         </div>
        
