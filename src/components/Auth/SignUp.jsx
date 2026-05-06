@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 
 const SignUp = () => {
+    const [errorMessage, setErrorMessage] = useState('');
     const handleRegister = e => {
+      
         e.preventDefault();
         const email = e.target.email.value;
         const name = e.target.name.value;
         const password = e.target.password.value;
         console.log(email)
         console.log(name)
-        console.log(password)
-    }
+        console.log(password) 
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(result => {
+                // Signed up 
+                console.log(result)
+                // ...
+              })
+              .catch((error) => {
+                setErrorMessage(error.message)
+                // ..
+              });
+            }
     return (
         <div>
             <h1>SignUp page</h1>
@@ -60,7 +74,7 @@ const SignUp = () => {
           <a href="#" class="text-indigo-600 hover:underline">Privacy Policy</a>.
         </label>
       </div>
-
+      <h2 className='text-red-600'>{errorMessage}</h2>
       <button
         type="submit"
         class="w-full rounded-lg bg-indigo-600 px-4 py-3 font-semibold text-white transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300"
