@@ -3,6 +3,11 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 
 const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState(false);
+
+    //Regex
+    const passwordRegExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
     const handleRegister = e => {
       
         e.preventDefault();
@@ -12,11 +17,16 @@ const SignUp = () => {
         console.log(email)
         console.log(name)
         console.log(password) 
+        setSuccessMessage(false)
         const auth = getAuth();
+        if(passwordRegExpression.test(password) === false){
+            setErrorMessage('Please enter a stronger password: 8–20 characters with uppercase and lowercase letters, a number, and a special character. ')
+        }
         createUserWithEmailAndPassword(auth, email, password)
           .then(result => {
                 // Signed up 
                 console.log(result)
+                setSuccessMessage(true)
                 // ...
               })
               .catch((error) => {
@@ -75,6 +85,10 @@ const SignUp = () => {
         </label>
       </div>
       <h2 className='text-red-600'>{errorMessage}</h2>
+      {
+        successMessage &&  <h2 className='text-green-600'>Succesfully Registered</h2>
+      }
+     
       <button
         type="submit"
         class="w-full rounded-lg bg-indigo-600 px-4 py-3 font-semibold text-white transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300"

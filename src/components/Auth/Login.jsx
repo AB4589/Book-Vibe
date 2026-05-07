@@ -13,6 +13,11 @@ const Login = () => {
             console.log(error)
         })
     }
+    const handleLogin = e =>{
+        e.preventDefault();
+        console.log(e.target.password.value)
+        console.log(e.target.email.value)
+    }
     const handleSignInWithGithub = () => {
         const provider = new GithubAuthProvider();
         signInWithPopup(auth, provider).then(result=>{
@@ -28,7 +33,21 @@ const Login = () => {
     }
     return (
        <>
-         <h1 className='flex justify-center'>Login</h1>
+         <div className='flex justify-center'>
+             <form onSubmit={handleLogin}>
+                        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <legend className="fieldset-legend">Login</legend>
+
+                    <label className="label">Email</label>
+                    <input name='email' type="email" className="input" placeholder="Email" />
+
+                    <label className="label">Password</label>
+                    <input name='password' type="password" className="input" placeholder="Password" />
+
+                    <button className="btn btn-neutral mt-4">Login</button>
+                </fieldset>
+             </form>
+         </div>
         <div className='flex justify-center'>        
             {user ? (  <div>
                         <figure className="flex justify-center items-center gap-2">
