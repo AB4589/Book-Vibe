@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from 'firebase/auth';
 
 const SignUp = () => {
     const [errorMessage, setErrorMessage] = useState('');
@@ -9,7 +9,6 @@ const SignUp = () => {
     const passwordRegExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     const handleRegister = e => {
-      
         e.preventDefault();
         const email = e.target.email.value;
         const name = e.target.name.value;
@@ -17,22 +16,32 @@ const SignUp = () => {
         console.log(email)
         console.log(name)
         console.log(password) 
-        setSuccessMessage(false)
         const auth = getAuth();
+        setSuccessMessage(false)
+        setErrorMessage('')
+
         if(passwordRegExpression.test(password) === false){
-            setErrorMessage('Please enter a stronger password: 8–20 characters with uppercase and lowercase letters, a number, and a special character. ')
+          setErrorMessage('Please enter a stronger password: 8–20 characters with uppercase and lowercase letters, a number, and a special character. ')
+          return;
         }
-        createUserWithEmailAndPassword(auth, email, password)
-          .then(result => {
-                // Signed up 
-                console.log(result)
-                setSuccessMessage(true)
-                // ...
-              })
-              .catch((error) => {
-                setErrorMessage(error.message)
-                // ..
-              });
+      
+          createUserWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                  // Signed up
+                  console.log(result)
+                  setSuccessMessage(true)
+                  // ...
+                  sendEmailVerification(auth.currentUser)
+                  .then(() => {
+                    // Email verification sent!
+                    alert("we have sent you a verification email")
+                    // ...
+                  });
+                })
+                .catch((error) => {
+                  setErrorMessage(error.message)
+                  // ..
+                });
             }
     return (
         <div>
@@ -97,7 +106,7 @@ const SignUp = () => {
       </button>
     </form>
 
-        </div>
+  </div>
     );
 };
 

@@ -1,22 +1,48 @@
-import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import React, { useState } from 'react';
+import { GithubAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import React, { useState, useRef } from 'react';
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+
+
 import { auth } from '../../Firebase/firebase.init';
+import { Link } from 'react-router';
 
 const Login = () => {
+    const [eyeToggle, setEyeToggle] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const emailRef = useRef();
     const [user, setUser] = useState(null);
     const provider = new GoogleAuthProvider;
-
     const handleSignIn = () =>{
+       
         signInWithPopup(auth,provider).then(result=>{
             setUser(result.user);
         }).catch(error=>{
+            setErrorMessage(error.message)
             console.log(error)
         })
     }
     const handleLogin = e =>{
         e.preventDefault();
-        console.log(e.target.password.value)
-        console.log(e.target.email.value)
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        console.log(email, password)
+         setSuccess(false);
+        //email sign in
+        signInWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                // Signed in 
+                console.log(result)
+                 setSuccess(true);
+                // ...
+            })
+            .catch((error) => {
+               setErrorMessage(error.message)
+            });
+        //
+
+        
     }
     const handleSignInWithGithub = () => {
         const provider = new GithubAuthProvider();
@@ -31,23 +57,47 @@ const Login = () => {
         signOut(auth).then(console.log('sign out completed')).catch(error=>console.log(error))
         setUser(null)
     }
+    const handleForgetPassword = () => {
+        const email = emailRef.current.value;
+        console.log(email)
+        sendPasswordResetEmail(auth, email)
+  .then(() => {
+        alert("password reset mail set")
+  })
+  .catch((error) => {
+   console.log(error)
+    // ..
+  });
+    }
     return (
        <>
          <div className='flex justify-center'>
              <form onSubmit={handleLogin}>
-                        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                    <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
                     <legend className="fieldset-legend">Login</legend>
-
                     <label className="label">Email</label>
-                    <input name='email' type="email" className="input" placeholder="Email" />
-
+                    <input name='email' type="email" ref={emailRef} className="input" placeholder="Email" />
                     <label className="label">Password</label>
-                    <input name='password' type="password" className="input" placeholder="Password" />
-
+                    <div className='relative'>
+                        <input name='password' type={eyeToggle?'text':'password'} className="input" placeholder="Password" />
+                            <button onClick={() => setEyeToggle(!eyeToggle)} className='absolute top-3 right-2'>{eyeToggle? <FaEye/> : <FaEyeSlash />
+}</button>
+                    </div>
                     <button className="btn btn-neutral mt-4">Login</button>
+                   
                 </fieldset>
+                {
+                    errorMessage && <p className='text-red-600'>{errorMessage}</p>
+                }
+                {
+                    success && <p className='text-green-600'>User Logged In Successfully</p>
+                }
              </form>
+              <div onClick={handleForgetPassword}>
+                        <a className='link link-hover'>Forget password?</a>
+                    </div>
          </div>
+         
         <div className='flex justify-center'>        
             {user ? (  <div>
                         <figure className="flex justify-center items-center gap-2">
@@ -73,6 +123,7 @@ const Login = () => {
   Login with GitHub
 </button>
             </>)}
+           
         </div>
         </>
     );
