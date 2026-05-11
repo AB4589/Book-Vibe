@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from 'firebase/auth';
+import { AuthContext } from '../Context/AuthContext';
 
 const SignUp = () => {
+
+    const createUser = useContext(AuthContext);
+    // console.log(userInfo);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState(false);
 
     //Regex
-    const passwordRegExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
+   const passwordRegExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,20}$/
     const handleRegister = e => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -25,23 +28,24 @@ const SignUp = () => {
           return;
         }
       
-          createUserWithEmailAndPassword(auth, email, password)
-            .then(result => {
-                  // Signed up
-                  console.log(result)
-                  setSuccessMessage(true)
-                  // ...
-                  sendEmailVerification(auth.currentUser)
-                  .then(() => {
-                    // Email verification sent!
-                    alert("we have sent you a verification email")
-                    // ...
-                  });
-                })
-                .catch((error) => {
-                  setErrorMessage(error.message)
-                  // ..
-                });
+          // createUserWithEmailAndPassword(auth, email, password)
+          //   .then(result => {
+          //         // Signed up
+          //         console.log(result)
+          //         setSuccessMessage(true)
+          //         // ...
+          //         sendEmailVerification(auth.currentUser)
+          //         .then(() => {
+          //           // Email verification sent!
+          //           alert("we have sent you a verification email")
+          //           // ...
+          //         });
+          //       })
+          //       .catch((error) => {
+          //         setErrorMessage(error.message)
+          //         // ..
+          //       });
+              createUser(email,password).then(result=>console.log(result)).catch(error=>console.log(error));
             }
     return (
         <div>

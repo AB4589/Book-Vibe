@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NavLinks from './Links'
 import { Link, Links } from 'react-router';
 import { getAuth } from 'firebase/auth';
+import { UserAuthContext } from '../../main';
+import { AuthContext } from '../Context/AuthContext';
 
 const NavBar = ({user}) => {
   const auth = getAuth();
-
+  const userInfo = useContext(AuthContext);
+  console.log(userInfo);
+  // const userInfo = useContext(UserAuthContext);
+  console.log("this is user info", userInfo);
   const links =  <NavLinks user={user}></NavLinks>;
     return (
       <div className="navbar bg-base-100 px-[135px] my-[50px]">
