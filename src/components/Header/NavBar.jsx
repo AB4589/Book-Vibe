@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { use } from 'react';
 import NavLinks from './Links'
 import { Link, Links } from 'react-router';
 import { getAuth } from 'firebase/auth';
@@ -7,11 +7,14 @@ import { AuthContext } from '../Context/AuthContext';
 
 const NavBar = ({user}) => {
   const auth = getAuth();
-  const userInfo = useContext(AuthContext);
-  console.log(userInfo);
+  const {singOutUser} = use(AuthContext);
+  
   // const userInfo = useContext(UserAuthContext);
-  console.log("this is user info", userInfo);
+  // console.log("this is user info", userInfo);
   const links =  <NavLinks user={user}></NavLinks>;
+  const handleSignOut = () => {
+    return singOutUser;
+  }
     return (
       <div className="navbar bg-base-100 px-[135px] my-[50px]">
   <div className="navbar-start">
@@ -68,6 +71,7 @@ const NavBar = ({user}) => {
     <figcaption>
       <p>{auth.currentUser.displayName}</p>
     </figcaption>
+    <a className="btn fcku" onClick={handleSignOut}>Sign Out</a>
   </figure>
 )  }
   </div>

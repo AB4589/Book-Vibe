@@ -1,13 +1,17 @@
-import { GithubAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
-import React, { useState, useRef } from 'react';
+import { GithubAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithPopup, signOut } from 'firebase/auth';
+import React, { useState, useRef, use } from 'react';
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
 
 import { auth } from '../../Firebase/firebase.init';
 import { Link } from 'react-router';
+import { AuthContext } from '../Context/AuthContext';
 
 const Login = () => {
+    const {signInUser} = use(AuthContext);
+
+    // console.log(userInfo)
     const [eyeToggle, setEyeToggle] = useState(false);
     const [success, setSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -30,19 +34,22 @@ const Login = () => {
         console.log(email, password)
          setSuccess(false);
         //email sign in
-        signInWithEmailAndPassword(auth, email, password)
-            .then(result => {
-                // Signed in 
-                console.log(result)
-                 setSuccess(true);
-                // ...
-            })
-            .catch((error) => {
-               setErrorMessage(error.message)
-            });
-        //
-
         
+        // signInWithEmailAndPassword(auth, email, password)
+        //     .then(result => {
+        //         // Signed in 
+        //         console.log(result)
+        //          setSuccess(true);
+        //         // ...
+        //     })
+        //     .catch((error) => {
+        //        setErrorMessage(error.message)
+        //     });
+        //
+        signInUser(email, password)
+        .then(result=> {console.log(result.user)})
+        .catch(error=> {console.log(error)})
+
     }
     const handleSignInWithGithub = () => {
         const provider = new GithubAuthProvider();

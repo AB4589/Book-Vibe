@@ -1,16 +1,18 @@
-import React, { useContext, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from 'firebase/auth';
+import React, { use, useState } from 'react';
+// import { getAuth } from 'firebase/auth';
 import { AuthContext } from '../Context/AuthContext';
 
 const SignUp = () => {
 
-    const createUser = useContext(AuthContext);
+  const {createUser} = use(AuthContext);
+  // console.log(userInfo);
+    // const createUser = useContext(AuthContext);
     // console.log(userInfo);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState(false);
 
     //Regex
-   const passwordRegExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,20}$/
+   const passwordRegExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/
     const handleRegister = e => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -19,7 +21,7 @@ const SignUp = () => {
         console.log(email)
         console.log(name)
         console.log(password) 
-        const auth = getAuth();
+        // const auth = getAuth();
         setSuccessMessage(false)
         setErrorMessage('')
 
