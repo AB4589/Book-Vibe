@@ -7,14 +7,17 @@ import { AuthContext } from '../Context/AuthContext';
 
 const NavBar = ({user}) => {
   const auth = getAuth();
-  const {singOutUser} = use(AuthContext);
+  const {signOutUser} = use(AuthContext);
   
   // const userInfo = useContext(UserAuthContext);
   // console.log("this is user info", userInfo);
-  const links =  <NavLinks user={user}></NavLinks>;
+  const links =  <NavLinks user={user, auth}></NavLinks>;
   const handleSignOut = () => {
-    return singOutUser;
-  }
+    signOutUser().then(()=>{
+      console.log("sign out successful")
+    })
+    .catch((error)=>{console.log(error)}
+  )};
     return (
       <div className="navbar bg-base-100 px-[135px] my-[50px]">
   <div className="navbar-start">

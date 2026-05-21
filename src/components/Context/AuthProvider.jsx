@@ -14,8 +14,8 @@ const AuthProvider = ({ children }) => {
     const signInUser = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
-    const singOutUser = () => {
-          signOut(auth).then(console.log('sign out completed')).catch(error=>console.log(error))
+    const signOutUser = () => {
+          return signOut(auth).then(console.log('sign out completed')).catch(error=>console.log("Something is wrong",error) )
       }
     // onAuthStateChanged(auth, (currentUser) => {
     //     if(currentUser){
@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
         user,
         createUser,
         signInUser,
-        singOutUser
+        signOutUser
     }
     return (
         <AuthContext value={userInfo}>
