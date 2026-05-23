@@ -5,13 +5,14 @@ import { getAuth } from 'firebase/auth';
 import { UserAuthContext } from '../../main';
 import { AuthContext } from '../Context/AuthContext';
 
-const NavBar = ({user}) => {
+const NavBar = () => {
   const auth = getAuth();
-  const {signOutUser} = use(AuthContext);
+
+  const {signOutUser, user} = use(AuthContext);
   
   // const userInfo = useContext(UserAuthContext);
   // console.log("this is user info", userInfo);
-  const links =  <NavLinks user={user, auth}></NavLinks>;
+  const links =  <NavLinks user={user}></NavLinks>;
   const handleSignOut = () => {
     signOutUser().then(()=>{
       console.log("sign out successful")

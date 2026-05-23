@@ -5,12 +5,12 @@ import { FaEyeSlash } from "react-icons/fa";
 
 
 import { auth } from '../../Firebase/firebase.init';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
 
 const Login = () => {
     const {signInUser} = use(AuthContext);
-
+    const navigate = useNavigate();
     // console.log(userInfo)
     const [eyeToggle, setEyeToggle] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -47,7 +47,10 @@ const Login = () => {
         //     });
         //
         signInUser(email, password)
-        .then(result=> {console.log(result.user)})
+        .then(result=> {
+            console.log(result)
+            navigate('/author')
+        })
         .catch(error=> {console.log(error)})
 
     }

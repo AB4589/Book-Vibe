@@ -15,6 +15,7 @@ import Author from '../components/Author/Author';
 import ContactUs from '../components/Contact/ContactUs';
 import Login from '../components/Auth/Login';
 import SignUp from '../components/Auth/SignUp';
+import PrivateRoute from './PrivateRoute';
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
         {
           path: "/author",
           loader: ()=> fetch('Books.json'),
-          Component: Author
+          element: <PrivateRoute><Author></Author></PrivateRoute>
         },
         {
           path: "/contact-us",

@@ -5,16 +5,20 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     // const userInfo = {
     //     email: "bhong@chong.com"
     // }    
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password);
     }
     const signInUser = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
     const signOutUser = () => {
+            setLoading(true)
           return signOut(auth).then(console.log('sign out completed')).catch(error=>console.log("Something is wrong",error) )
       }
     // onAuthStateChanged(auth, (currentUser) => {
@@ -36,6 +40,7 @@ const AuthProvider = ({ children }) => {
     },[])
     const userInfo = {
         user,
+        loading, 
         createUser,
         signInUser,
         signOutUser
